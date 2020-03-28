@@ -32,7 +32,7 @@ const courses = JSON.parse(
 const importData = async () => {
 	try {
 		await Bootcamp.create(bootcamps);
-		await Course.create(courses);
+		//await Course.create(courses);
 		console.log('Data Imported....'.green.inverse);
 		process.exit();
 	} catch (err) {
@@ -53,7 +53,7 @@ const deleteData = async () => {
 	}
 };
 
-if (process.argv[2] === '-1') {
+if (process.argv[2] === '-i') {
 	importData();
 } else if (process.argv[2] === '-d') {
 	deleteData();
