@@ -25,17 +25,17 @@ router.route('/radius/:zipcode/:distance').get(getBootcampsInRadius);
 
 router
 	.route('/:id/photo')
-	.put(protect, authorzie('publisher', 'admin'), bootcampPhotoUpload);
+	.put(protect, authorize('publisher', 'admin'), bootcampPhotoUpload);
 
 router
 	.route('/')
 	.get(advancedResults(Bootcamp, 'courses'), getBootcamps)
-	.post(protect, authorzie('publisher', 'admin'), createBootcamp);
+	.post(protect, authorize('publisher', 'admin'), createBootcamp);
 
 router
 	.route('/:id')
 	.get(getBootcamp)
-	.put(protect, authorzie('publisher', 'admin'), updateBootcamp)
-	.delete(protect, authorzie('publisher', 'admin'), deleteBootcamp);
+	.put(protect, authorize('publisher', 'admin'), updateBootcamp)
+	.delete(protect, authorize('publisher', 'admin'), deleteBootcamp);
 
 module.exports = router;
