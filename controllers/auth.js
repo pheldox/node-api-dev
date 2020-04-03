@@ -7,7 +7,6 @@ const sendEmail = require('../utils/sendEmail');
 // @desc      Register
 // @route     GET /api/v1/auth/register
 // @access    Public
-
 exports.register = asyncHandler(async (req, res, next) => {
 	const { name, email, password, role } = req.body;
 
