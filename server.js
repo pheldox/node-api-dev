@@ -3,8 +3,13 @@ const dotenv = require('dotenv');
 const morgan = require('morgan');
 const colors = require('colors');
 const path = require('path');
+const helmet = require('helmet');
+const xss = require('xss-clean');
+const rateLimit = require('express-rate-limit');
+const hpp = require('hpp');
+const cors = require('cors');
 const cookieParser = require('cookie-parser');
-
+const mongoSanitize = require('express-mongo-sanitize');
 const errorHandler = require('./middleware/error');
 const connectDB = require('./config/db');
 const fileupload = require('express-fileupload');
@@ -35,6 +40,25 @@ if (process.env.NODE_ENV === 'development') {
 
 // File uploading
 app.use(fileupload());
+
+// Sanitize data
+app.use(mongoSanitize());
+
+//Set security headers
+app.use(helmet());
+
+//Prevent xss attacks
+app.use(xss());
+
+// Enable CORS
+app.use(cors());
+// Rate limiting
+const limiter = rateLimit({
+	windowMs: 10 * 60 * 1000, /// 10 mins
+	max: 100
+});
+
+app.use(limiter);
 
 app.use(express.static(path.join(__dirname, 'public')));
 //Mount routers
