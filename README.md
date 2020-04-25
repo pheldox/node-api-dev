@@ -11,7 +11,7 @@ Technologies/Tools:
 * File uploader
 * Nodemailer
 * Mailtrap
-* Error Handling
+* Custom error Handling
 * Security: xss protection,rate limiting, NoSQL injection
 
 ## Demo
